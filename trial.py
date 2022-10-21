@@ -41,6 +41,7 @@ with mp_pose.Pose(
       landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
     
     if results.pose_landmarks:
+
       left_arm_length = findDistance(
           results.pose_landmarks.landmark[lmPose.LEFT_SHOULDER].x,
           results.pose_landmarks.landmark[lmPose.LEFT_SHOULDER].y,
@@ -52,12 +53,20 @@ with mp_pose.Pose(
           results.pose_landmarks.landmark[lmPose.RIGHT_SHOULDER].y,
           results.pose_landmarks.landmark[lmPose.RIGHT_WRIST].x,
           results.pose_landmarks.landmark[lmPose.RIGHT_WRIST].y)
-      
-      if left_arm_length > 0.3:
-        press('space')
 
-      if right_arm_length > 0.3:
-        press('2')
+      left_elbow_z = results.pose_landmarks.landmark[lmPose.LEFT_ELBOW].z
+      right_elbow_z = results.pose_landmarks.landmark[lmPose.RIGHT_ELBOW].z
+      left_wrist_z = results.pose_landmarks.landmark[lmPose.LEFT_WRIST].visibility
+      right_wrist_z = results.pose_landmarks.landmark[lmPose.RIGHT_WRIST].z
+      
+      if (results.pose_landmarks.landmark[lmPose.LEFT_WRIST].visibility > 0.95) \
+        and (results.pose_landmarks.landmark[lmPose.RIGHT_WRIST].visibility > 0.95):
+        
+        if left_arm_length > 0.3:
+          press('space')
+
+        if right_arm_length > 0.3:
+          press('2')
     
     # Flip the image horizontally for a selfie-view display.
     cv2.imshow('MediaPipe Pose', cv2.flip(image, 1))
