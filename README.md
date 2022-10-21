@@ -15,7 +15,7 @@ Lastly, the pose is used to recognize punches as a part of a shadow-boxing routi
 ### Dependencies
 
 * Compatible across Windows, Mac, Linux
-* requires latest version of Python, opencv, mediapipe, pyautoguy
+* requires latest version of Python, opencv, mediapipe, pyautogui
 
 ### Installing
 
